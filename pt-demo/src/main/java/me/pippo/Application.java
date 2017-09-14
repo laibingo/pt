@@ -20,7 +20,7 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... strings) throws Exception {
 		ptClient.start();
-		for (int i = 0; i < 10_000_000; i++) {
+		for (int i = 0; i < Integer.MAX_VALUE; i++) {
 			ptClient.greet(String.valueOf(i));
 		}
 	}
