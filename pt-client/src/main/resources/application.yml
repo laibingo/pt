@@ -1,0 +1,5 @@
+pt:
+  client:
+    rate: 25000
+    host: localhost
+    port: 50001

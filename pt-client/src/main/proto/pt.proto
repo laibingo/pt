@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "me.pippo";
+option java_outer_classname = "PtProto";
+
+package me.pippo.proto;
+
+service Service {
+    rpc echo (PtReq) returns (PtResp) {
+    }
+}
+
+message PtReq {
+    string msg = 1;
+    string uuid = 2;
+}
+
+message PtResp {
+    string msg = 1;
+    string uuid = 2;
+}
+
