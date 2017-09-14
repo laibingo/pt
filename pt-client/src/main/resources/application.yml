@@ -3,3 +3,4 @@ pt:
     rate: 25000
     host: localhost
     port: 50001
+    threads: 10

@@ -31,6 +31,12 @@ public class Client {
 	@Value("${pt.client.port:50001}")
 	private int port;
 
+	@Value("${pt.client.threads:5}")
+	private int threads;
+
+	@Value("${pt.client.timeout:50}")
+	private int timeout;
+
 	private RateLimiter limiter;
 
 	private volatile boolean running;
@@ -43,13 +49,13 @@ public class Client {
 		channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext(true).build();
 		futureStub = ServiceGrpc.newFutureStub(channel);
 		limiter = RateLimiter.create(rate);
-		ExecutorService executorService = Executors.newFixedThreadPool(2);
+		ExecutorService executorService = Executors.newFixedThreadPool(threads);
 		running = true;
 		executorService.submit(() -> {
 			while (running) {
 				try {
 					ListenableFuture<PtResp> future = futures.take();
-					PtResp ptResp = future.get(150, TimeUnit.MILLISECONDS);
+					future.get(150, TimeUnit.MILLISECONDS);
 				} catch (Exception e) {
 					timeoutCount.incrementAndGet();
 				}
