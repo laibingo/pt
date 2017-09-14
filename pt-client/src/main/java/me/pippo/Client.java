@@ -55,7 +55,7 @@ public class Client {
 			while (running) {
 				try {
 					ListenableFuture<PtResp> future = futures.take();
-					future.get(150, TimeUnit.MILLISECONDS);
+					future.get(timeout, TimeUnit.MILLISECONDS);
 				} catch (Exception e) {
 					timeoutCount.incrementAndGet();
 				}
